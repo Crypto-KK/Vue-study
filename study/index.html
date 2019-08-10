@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        [v-cloak] {
+            display: none;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div id="app">
+<!--        声明式渲染-->
+        <div v-cloak>
+            {{message}}
+        </div>
+
+<!--        v-bind属性绑定-->
+        <span :title="spanTitle">我是span</span>
+
+<!--        条件渲染-->
+        <div v-if="isLogin">
+            登录成功
+        </div>
+        <div v-else>
+            登录失败
+        </div>
+        <div v-show="isLogin">
+            用户名为：kk
+        </div>
+
+<!--        列表渲染array-->
+        <br>
+        <ul>
+            <li v-for="(item, index) of items" v-if="item.isShow" :key="index">
+                <p>{{index}}</p>
+                <p>{{item.name}}</p>
+                <p>{{item.price}}</p>
+            </li>
+        </ul>
+
+<!--        列表渲染object-->
+        <br><br>
+        <ul>
+           <li v-for="(value, key, index) of dataSource" :key="index">
+               <p>
+                   {{index}},{{key}}:{{value}}
+               </p>
+           </li>
+        </ul>
+
+
+<!--        v-bind绑定class或者style-->
+        <br><br>
+        <p class="test" :class="{'red': true, 'blue': false}"></p>
+        <p style="font-weight: bold" :style="testStyle">样式绑定</p>
+
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+    <script>
+        var app = new Vue({
+            el: '#app',
+            data: {
+                message: 'kk',
+                spanTitle: '我是span的title',
+                isLogin: false,
+                items: [
+                    {
+                        name: 'iphone',
+                        price: 12.00,
+                        isShow: false
+                    },
+                    {
+                        name: 'js',
+                        price: 13.23,
+                        isShow: true
+                    }
+                ],
+
+                dataSource: {
+                    name: 'Vue',
+                    price: 12.22,
+                    type: 'typescript'
+                },
+
+                color: 'red',
+                testStyle: {
+                    color: 'blue',
+                    fontSize: '18px'
+                }
+            }
+        })
+    </script>
+
+</body>
+</html>

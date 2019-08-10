@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <div id="app">
+        <input type="text" v-model="inputMessage">
+        <p>{{inputMessage}}</p>
+        <br>
+
+        <textarea cols="30" rows="10" v-model="textareaMessage"></textarea>
+        <p>{{textareaMessage}}</p>
+        <br>
+
+        <input type="checkbox" id="android" value="android" v-model="checkedMessage">
+        <label for="android">android</label>
+        <input type="checkbox" id="ios" value="ios" v-model="checkedMessage">
+        <label for="ios">ios</label>
+        <input type="checkbox" id="js" value="js" v-model="checkedMessage">
+        <label for="js">js</label>
+        <p>checked: {{checkedMessage}}</p>
+
+        <br>
+        <input type="radio" id="javascript" value="javascript" name="testRadio" v-model="radioMessage">
+        <label for="javascript">javascript</label>
+        <br>
+        <input type="radio" id="vue" value="vue" name="testRadio" v-model="radioMessage">
+        <label for="vue">vue</label>
+        <br>
+        <p>radio: {{radioMessage}}</p>
+
+        <br>
+        <select v-model="selectedMessage" multiple style="width: 100px">
+            <option>A</option>
+            <option>B</option>
+            <option>C</option>
+        </select>
+        <br>
+        <span>select: {{selectedMessage}}</span>
+
+
+<!--        v-model修饰符-->
+        <br><br>
+        <input type="text" v-model.lazy="testlazy">
+        <p>{{testlazy}}</p>
+        <br>
+
+        <input type="number" v-model.number="testnumber">
+        <p>{{testnumber}}</p>
+        <br>
+
+        <input type="text" v-model.trim="testTrim">
+        <p>{{testTrim}}</p>
+
+
+    </div>
+
+
+
+    <script src="https://cdn.bootcss.com/vue/2.6.10/vue.js"></script>
+    <script>
+        var app = new Vue({
+            el: '#app',
+            data: {
+                inputMessage: '',
+                textareaMessage: '',
+                checkedMessage: [],
+                radioMessage: '',
+                selectedMessage: [],
+
+                testlazy: '',
+                testnumber: '',
+                testTrim: ''
+            }
+        })
+    </script>
+
+</body>
+</html>

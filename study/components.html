@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+
+    <div id="app">
+        <btn-success></btn-success>
+
+    </div>
+
+<script src="https://cdn.bootcss.com/vue/2.6.10/vue.js"></script>
+<script>
+
+    var btnSuccess = {
+        template: '<div><span>{{count}}</span><button class="btn-success" @click="onClick">点击</button></div>',
+        data: function() {
+            return {
+                count: 0
+            }
+        },
+        methods: {
+            onClick: function () {
+                this.count += 1;
+            }
+        }
+    };
+
+    var app = new Vue({
+        el: '#app',
+        components: {
+            'btn-success': btnSuccess
+        }
+    })
+
+
+</script>
+</body>
+</html>

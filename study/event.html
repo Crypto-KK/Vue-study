@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+    <div id="app">
+
+        <div>
+            <button @click="count += 1">count += 1</button>
+            <p>count:{{count}}</p>
+        </div>
+
+        <div>
+            <button @click="onClick">onClick</button>
+        </div>
+
+        <br>
+        <div>
+            <button @click="onSumClick(1,2)">onSumClick</button>
+        </div>
+
+        <br>
+        <div>
+            <input type="text" @keyup="onChange" v-model="inputMsg">
+        </div>
+
+
+        <h1>事件的修饰符</h1>
+
+
+<!--        阻止默认的行为-->
+        <a href="https://www.baidu.com" @click.prevent="onBaiduClick">百度链接</a>
+
+<!--        事件冒泡-->
+        <div @click="onFather">
+            <button @click.stop="onChild">冒泡测试</button>
+        </div>
+
+<!--        事件只处理一次-->
+
+        <button @click.once="onClickOnce">只能点击一次</button>
+
+        <!--
+    滚动事件的默认行为 (即滚动行为) 将会立即触发,而不会等待事件处理完成之后在触发滚动。
+    在默认情况下滚动的时候，浏览器会在整个事件处理完毕之后再触发滚动，
+    因为浏览器并不知道这个事件是否在其处理函数中被调用了 event.preventDefault() （通知 Web 浏览器不要执行与事件关联的默认动作）。
+    .passive 修饰符用来进一步告诉浏览器这个事件的默认行为不会被取消。 这样可有效的提供浏览器的性能。
+
+    不要把 .passive 和 .prevent 一起使用，因为 .prevent 将会被忽略，
+    同时浏览器可能会向你展示一个警告。请记住，.passive 会告诉浏览器你不想阻止事件的默认行为。
+    -->
+
+        <div @scroll.passive="onScroll">...</div>
+
+        <!--
+        修饰符可以串联,并且在进行修饰符串联的时候，顺序很重要。比如：
+        如果我们使用 @click.prevent.self="alert('http://www.baidu.com/')" ,
+        那么不仅阻止了 a标签中前往百度的跳转，也阻止了 a标签的点击事件。
+        而如果使用 @click.self.prevent="alert('http://www.baidu.com/')" ,
+        那么直阻止了 a标签的点击事件，在 testOnClickMethods 执行之后会跳转到百度
+    -->
+
+        <br>
+        <div @click="onClick">
+            onClick
+            <a href="http://www.baidu.com" @click.prevent.self="onBaiduClick">http://baidu.com
+                <button @click="onSumClick(34,6)">onSumClick</button>
+            </a>
+
+        </div>
+
+    </div>
+
+<script src="https://cdn.bootcss.com/vue/2.6.10/vue.js"></script>
+<script>
+    var app = new Vue({
+        el: '#app',
+        data: {
+            count: 0,
+            inputMsg: ''
+        },
+        methods: {
+            onClick: function (event) {
+                alert('hello')
+                if (event) {
+                    alert(event.target.tagName)
+                }
+            },
+            onSumClick: function (x, y) {
+                alert(x + y)
+
+            },
+            onChange: function () {
+                console.log(this.inputMsg)
+            },
+            onFather: function () {
+                alert('father')
+            },
+            onChild: function () {
+                alert('child')
+            },
+            onClickOnce: function () {
+                alert('点击一次')
+            },
+
+            onBaiduClick: function () {
+                alert('百度')
+            },
+
+            onScroll: function () {
+                alert('scroll')
+            }
+        }
+    })
+</script>
+
+</body>
+</html>
